@@ -5,7 +5,7 @@
 int main()
 {
     for (int i = 0; i < 10000; i++) {
-        Sleep(2000);
+        Sleep(1000);
         std::cout << "\t" << _getpid();
     }
 }
