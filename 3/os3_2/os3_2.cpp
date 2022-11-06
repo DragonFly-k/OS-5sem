@@ -6,14 +6,12 @@ int main()
 {
     LPCWSTR an1 = L"D:\\универ\\осисп\\лабы\\3\\os3\\x64\\Debug\\os3_2_1.exe",
             an2 = L"D:\\универ\\осисп\\лабы\\3\\os3\\x64\\Debug\\os3_2_2.exe";
-    STARTUPINFO si1, si2; // устанавливает оконный режим терминала, рабочий стол, стандартные дескрипторы и внешний вид главного окна для нового процесса.
-    PROCESS_INFORMATION pi1, pi2;// принимает идентифицирующую информацию о новом процессе.
+    STARTUPINFO si1, si2; 
+    PROCESS_INFORMATION pi1, pi2;
     ZeroMemory(&si1, sizeof(STARTUPINFO));  
     si1.cb = sizeof(STARTUPINFO);
     ZeroMemory(&si2, sizeof(STARTUPINFO)); 
     si2.cb = sizeof(STARTUPINFO);
-
-	//имя исполняемого модуля, наследование, флаги создания, инф о предустановке, инф о процессе
     if (CreateProcess(an1, NULL, NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &si1, &pi1))
         std::cout << "-- Process OS3_2_1 created\n";
     else
@@ -29,9 +27,9 @@ int main()
         std::cout << "\t" << _getpid();
     }
 
-    WaitForSingleObject(pi1.hProcess, INFINITE);//ожидание завершения дочернего процесса
+    WaitForSingleObject(pi1.hProcess, INFINITE);
     WaitForSingleObject(pi2.hProcess, INFINITE);
-    CloseHandle(pi1.hProcess);//закрытие дискрипторов процесса
+    CloseHandle(pi1.hProcess);
     CloseHandle(pi2.hProcess);
     return 0;
 }

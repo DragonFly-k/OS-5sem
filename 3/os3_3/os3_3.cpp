@@ -1,22 +1,22 @@
 ﻿#include <iostream>
 #include <Windows.h>
-#include <TlHelp32.h>//библиотека для работы с процессами
+#include <TlHelp32.h>
 #include <iomanip> 
 
 int main()
-{                                          //все процессы и потоки в системе
-    HANDLE snap = CreateToolhelp32Snapshot(TH32CS_SNAPALL, 0); //снимок указанных процессов
-    PROCESSENTRY32 peProcessEntry; //структура для хранения информации о процессе
+{                                          
+    HANDLE snap = CreateToolhelp32Snapshot(TH32CS_SNAPALL, 0); 
+    PROCESSENTRY32 peProcessEntry; 
     peProcessEntry.dwSize = sizeof(PROCESSENTRY32);
     try
     {
-        if (!Process32First(snap, &peProcessEntry))//если не удалось получить информацию о первом процессе
+        if (!Process32First(snap, &peProcessEntry))
             throw L"Process32First";
         do
         {
             std::wcout << L"Pid: " << peProcessEntry.th32ProcessID <<"\t"
                 << L"Name: " << peProcessEntry.szExeFile << "\n";
-        } while (Process32Next(snap, &peProcessEntry));//делаем снимок следующего процесса
+        } while (Process32Next(snap, &peProcessEntry));
     }
     catch (char* msg) {
         std::wcout << L"ERROR: " << msg << "\n";
