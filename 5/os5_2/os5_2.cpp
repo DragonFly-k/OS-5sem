@@ -36,14 +36,18 @@ int main(int argc, char* argv[])
         std::cout << "P2 = "; std::cin >> P2;
         std::cout << "P3 = "; std::cin >> P3;
 		
-        if (!SetProcessAffinityMask(GetCurrentProcess(), P1)) throw "SetProcessAffinityMask";
-        if (!GetProcessAffinityMask(GetCurrentProcess(), &pa, &sa)) throw "Process Affinity Mask";
+        if (!SetProcessAffinityMask(GetCurrentProcess(), P1))
+            throw "SetProcessAffinityMask";
+        if (!GetProcessAffinityMask(GetCurrentProcess(), &pa, &sa)) 
+            throw "Process Affinity Mask";
         std::cout << "\nProcess Affinity Mask: " << std::showbase << std::hex << pa << "\n";
         std::cout << "System Affinity Mask: " << std::showbase << std::hex << sa << "\n";
         std::cout << std::dec << std::noshowbase;
 
-        if (!CreateProcess(an, NULL, NULL, NULL, FALSE, CREATE_NEW_CONSOLE | SwPriority(P2), NULL, NULL, &si, &pi))  throw "---Proc 1 wasn't created\n";
-        if (!CreateProcess(an, NULL, NULL, NULL, FALSE, CREATE_NEW_CONSOLE | SwPriority(P3), NULL, NULL, &si1, &pi1))  throw "---Proc 2 wasn't created\n";
+        if (!CreateProcess(an, NULL, NULL, NULL, FALSE, CREATE_NEW_CONSOLE | SwPriority(P2), NULL, NULL, &si, &pi))  
+            throw "---Proc 1 wasn't created\n";
+        if (!CreateProcess(an, NULL, NULL, NULL, FALSE, CREATE_NEW_CONSOLE | SwPriority(P3), NULL, NULL, &si1, &pi1))  
+            throw "---Proc 2 wasn't created\n";
     
         WaitForSingleObject(pi.hProcess, INFINITE);
         WaitForSingleObject(pi1.hProcess, INFINITE);
